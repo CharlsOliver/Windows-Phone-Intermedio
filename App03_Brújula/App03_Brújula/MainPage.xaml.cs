@@ -8,11 +8,24 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using App03_Brújula.Resources;
+using Microsoft.Devices.Sensors;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace App03_Brújula
 {
     public partial class MainPage : PhoneApplicationPage
     {
+
+        Compass objBrujula;
+        RotateTransform objMovimiento;
+        DispatcherTimer objCalibracion;
+        double vTrueHeading = 0;
+        double vReciproco = 0;
+        double vHeadingAcurrency = 0;
+        bool vBrujula = false;
+        bool vAlfa = false;
+
         // Constructor
         public MainPage()
         {
@@ -20,6 +33,95 @@ namespace App03_Brújula
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        private void Btn_Brujula_Click(object sender, RoutedEventArgs e)
+        {
+            if(Compass.IsSupported) {
+
+                objBrujula = new Compass();
+                objBrujula.CurrentValueChanged += objBrujula_CurrentValueChanged;   
+            } else {
+                MessageBox.Show("El dispositivo no tiene brújula","Brújula", MessageBoxButton.OK);
+            }
+        }
+
+        void objBrujula_CurrentValueChanged(object sender, SensorReadingEventArgs<CompassReading> e)
+        {
+            if(objBrujula.IsDataValid){
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    vHeadingAcurrency = e.SensorReading.HeadingAccuracy;
+                    vTrueHeading = e.SensorReading.TrueHeading;
+                    objMovimiento = new RotateTransform();
+
+                    if ((180 <= vTrueHeading) && (vTrueHeading >= 360))
+                        vReciproco = vTrueHeading - 180;
+                    else
+                        vReciproco = vTrueHeading + 180;
+
+                    brujula.RenderTransformOrigin = new Point(0.5, 0.5);
+
+                    objMovimiento.Angle = 360 - vTrueHeading;
+                    brujula.RenderTransform = objMovimiento;
+
+                    if (!vAlfa)
+                    {
+
+                        vTrueHeading = Math.Round(vTrueHeading, 2);
+                        txBlock_grados.Text = "Grados: " + vTrueHeading.ToString();
+
+                        vReciproco = Math.Round(vReciproco, 2);
+                        txBlock_reciproco.Text = "Reciproco: " + vReciproco.ToString();
+                    }
+                    else {
+                        if (((337 <= vTrueHeading) && (vTrueHeading < 360)) || ((0 <= vTrueHeading) && (vTrueHeading < 22))) {
+                            txBlock_grados.Text = "Norte";
+                            txBlock_reciproco.Text = "Sur";
+                        }
+                        else if ((22 <= vTrueHeading) && (vTrueHeading < 67)) {
+                            txBlock_grados.Text = "Nor-Oeste";
+                            txBlock_reciproco.Text = "Sur-Oeste";
+                        }
+                        else if ((67 <= vTrueHeading) && (vTrueHeading < 112)) {
+                            txBlock_grados.Text = "Este";
+                            txBlock_reciproco.Text = "Oeste";
+                        }
+                        else if ((112 <= vTrueHeading) && (vTrueHeading < 152)) {
+                            txBlock_grados.Text = "Sur-Este";
+                            txBlock_reciproco.Text = "Nor-Este";
+                        }
+                        else if ((152 <= vTrueHeading) && (vTrueHeading < 202))
+                        {
+                            txBlock_grados.Text = "Sur";
+                            txBlock_reciproco.Text = "Norte";
+                        }
+                        else if ((202 <= vTrueHeading) && (vTrueHeading < 247))
+                        {
+                            txBlock_grados.Text = "Sur-Oeste";
+                            txBlock_reciproco.Text = "Nor-Oeste";
+                        }
+                        else if ((247 <= vTrueHeading) && (vTrueHeading < 292))
+                        {
+                            txBlock_grados.Text = "Oeste";
+                            txBlock_reciproco.Text = "Este";
+                        }
+                        else if ((292 <= vTrueHeading) && (vTrueHeading < 337))
+                        {
+                            txBlock_grados.Text = "Nor-Oeste";
+                            txBlock_reciproco.Text = "Sur-Este";
+                        }
+                    }
+                });
+            } else {
+            
+            }
+        }
+
+        private void Btn_Alfa_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         // Sample code for building a localized ApplicationBar

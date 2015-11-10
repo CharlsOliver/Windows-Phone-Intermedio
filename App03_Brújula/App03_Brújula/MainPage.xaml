@@ -48,8 +48,16 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image Name="elipse" Height="271" HorizontalAlignment="Left" Margin="95,26,0,0" VerticalAlignment="Top" Width="264" Stretch="Uniform" Source="/Assets/img/Brujula1.png"/>
-            <Image Name="elipse2" Height="269" HorizontalAlignment="Left" Margin="95,28,0,0"
+            <Image Name="elipse2" Height="269" HorizontalAlignment="Left" Margin="95,28,0,0" VerticalAlignment="Top" Width="264" Stretch="Uniform" Source="/Assets/img/Brujula2.png"/>
+            <Image Name="brujula" Height="265" HorizontalAlignment="Left" Margin="93,32,0,0" VerticalAlignment="Top" Width="288" Stretch="Uniform" Source="/Assets/img/Brujula3.png"/>
+            <Image Name="point" Height="24" HorizontalAlignment="Left" Margin="218,30,0,0" VerticalAlignment="Top" Width="29" Stretch="Uniform" Source="/Assets/img/Brujula4.png"/>
+            <TextBlock HorizontalAlignment="Left" Margin="95,302,0,0" TextWrapping="Wrap" Text="Lectura de Brújula" TextAlignment="Center" VerticalAlignment="Top" FontSize="30" Width="264"/>
+            <TextBlock Name="txBlock_grados" HorizontalAlignment="Left" Margin="95,362,0,0" TextWrapping="Wrap" Text="Grados: 000" TextAlignment="Center" VerticalAlignment="Top" FontSize="25" Width="264"/>
+            <TextBlock Name="txBlock_reciproco" HorizontalAlignment="Left" Margin="95,400,0,0" TextWrapping="Wrap" Text="Reciproco: 000" TextAlignment="Center" VerticalAlignment="Top" FontSize="25" Width="264"/>
+            <Button Name="Btn_Brujula" Click="Btn_Brujula_Click" Content="Brújula" HorizontalAlignment="Left" Margin="0,458,0,0" VerticalAlignment="Top" Width="247"/>
+            <Button Name="Btn_Alfa" Click="Btn_Alfa_Click" Content="Alfa" HorizontalAlignment="Left" Margin="0,525,0,0" VerticalAlignment="Top" Width="247"/>
         </Grid>
+        
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

@@ -125,6 +125,11 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\img\Brujula1.png" />
+    <Content Include="Assets\img\Brujula2.png" />
+    <Content Include="Assets\img\Brujula3.png" />
+    <Content Include="Assets\img\Brujula4.png" />
+    <Content Include="Assets\img\Pantalla_AjusteBrujula.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
