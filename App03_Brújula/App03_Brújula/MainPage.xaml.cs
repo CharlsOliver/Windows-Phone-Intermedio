@@ -38,9 +38,19 @@ namespace App03_Brújula
         private void Btn_Brujula_Click(object sender, RoutedEventArgs e)
         {
             if(Compass.IsSupported) {
-
-                objBrujula = new Compass();
-                objBrujula.CurrentValueChanged += objBrujula_CurrentValueChanged;   
+                if (!vBrujula)
+                {
+                    objBrujula = new Compass();
+                    objBrujula.TimeBetweenUpdates = TimeSpan.FromMilliseconds(100);
+                    objBrujula.CurrentValueChanged += objBrujula_CurrentValueChanged;
+                    objBrujula.Start();
+                    Btn_Brujula.Content = "Apagar Brújula";
+                }
+                else {
+                    vBrujula = false;
+                    Btn_Brujula.Content = "Iniciar Brújula";
+                    objBrujula.Stop();
+                }
             } else {
                 MessageBox.Show("El dispositivo no tiene brújula","Brújula", MessageBoxButton.OK);
             }
@@ -114,14 +124,22 @@ namespace App03_Brújula
                         }
                     }
                 });
-            } else {
-            
             }
         }
 
         private void Btn_Alfa_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Btn_Alfa.Content == "Numerico")
+            {
 
+                vAlfa = false;
+                Btn_Alfa.Content = "Alfa";
+            }
+            else {
+
+                vAlfa = true;
+                Btn_Alfa.Content = "Numerico";
+            }
         }
 
         // Sample code for building a localized ApplicationBar
