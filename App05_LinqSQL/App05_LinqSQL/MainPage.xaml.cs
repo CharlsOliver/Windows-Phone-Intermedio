@@ -45,6 +45,8 @@ namespace App05_LinqSQL
                 contexto.SubmitChanges();
 
                 MessageBox.Show("Registro creado correctamente", "Alta", MessageBoxButton.OK);
+
+                borrarDatos();
             } else {
 
                 MessageBox.Show("Hay campos obligatorios vacios", "No se puede insertar :(", MessageBoxButton.OK);
@@ -64,6 +66,8 @@ namespace App05_LinqSQL
                 contexto.SubmitChanges();
                 MessageBox.Show("Registro borrado con éxito","Eliminado :)", MessageBoxButton.OK);
 
+                borrarDatos();
+
             } else {
                 MessageBox.Show("Hay campos obligatorios vacios", "No se puede eliminar :(", MessageBoxButton.OK);
             }
@@ -71,6 +75,8 @@ namespace App05_LinqSQL
 
         private void Btn_Consulta_Click(object sender, RoutedEventArgs e)
         {
+            int idCliente = 0;
+
             if(txBox_Nombre.Text != string.Empty){
 
                 var vConsulta = from cliente in contexto.tClientes
@@ -78,31 +84,33 @@ namespace App05_LinqSQL
                                 select cliente;
 
                 foreach (var info in vConsulta) {
+
+                    idCliente = info.idCliente;
                     txBox_Nombre.Text = info.nombre.ToString();
                     txBox_Correo.Text = info.correo.ToString();
                     txBox_Telefono.Text = info.telefono.ToString();
                 }
 
-                MessageBox.Show("Consulta realizada con éxito", "Consulta exitosa :)", MessageBoxButton.OK);
+                if(idCliente==0)
+                    MessageBox.Show("No existe el nombre que estas buscando", "No hay registros", MessageBoxButton.OK);
+             
             } else {
                 MessageBox.Show("Hay campos obligatorios vacios", "No se puede consultar :(", MessageBoxButton.OK);
             }
-        } 
+        }
 
-        // Sample code for building a localized ApplicationBar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
+        
 
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
+        private void borrarDatos()
+        {
+            txBox_Nombre.Text = string.Empty;
+            txBox_Telefono.Text = string.Empty;
+            txBox_Correo.Text = string.Empty;
+        }
 
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+        private void Btn_Todos_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Todos.xaml",UriKind.Relative));
+        }
     }
 }

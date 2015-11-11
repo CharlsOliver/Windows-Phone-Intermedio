@@ -17,3 +17,4 @@ C:\Users\PC25\Documents\Oliver\App05_LinqSQL\App05_LinqSQL\obj\Debug\App05_LinqS
 C:\Users\PC25\Documents\Oliver\App05_LinqSQL\App05_LinqSQL\obj\Debug\App05_LinqSQL.dll
 C:\Users\PC25\Documents\Oliver\App05_LinqSQL\App05_LinqSQL\obj\Debug\App05_LinqSQL.pdb
 C:\Users\PC25\Documents\Oliver\App05_LinqSQL\App05_LinqSQL\obj\Debug\XapCacheFile.xml
+C:\Users\PC25\Documents\Oliver\App05_LinqSQL\App05_LinqSQL\obj\Debug\Todos.g.cs
