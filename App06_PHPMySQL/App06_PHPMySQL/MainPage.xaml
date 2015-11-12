@@ -54,8 +54,8 @@
             <TextBlock HorizontalAlignment="Left" Margin="10,228,0,0" TextWrapping="Wrap" Text="Correo: " VerticalAlignment="Top"/>
             <TextBox Name="txBox_Correo" HorizontalAlignment="Left" Height="72" Margin="10,260,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436"/>
             <Button Name="Btn_Alta" Content="Alta" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top" Width="217" Click="Btn_Alta_Click"/>
-            <Button Name="Btn_Baja" Content="Baja" HorizontalAlignment="Left" Margin="232,399,0,0" VerticalAlignment="Top" Width="214"/>
-            <Button Name="Btn_Consulta" Content="Consulta" HorizontalAlignment="Left" Margin="10,476,0,0" VerticalAlignment="Top" Width="217"/>
+            <Button Name="Btn_Baja" Content="Baja" HorizontalAlignment="Left" Margin="232,399,0,0" VerticalAlignment="Top" Width="214" Click="Btn_Baja_Click"/>
+            <Button Name="Btn_Consulta" Content="Consulta" HorizontalAlignment="Left" Margin="10,476,0,0" VerticalAlignment="Top" Width="217" Click="Btn_Consulta_Click"/>
             <Button Name="Btn_Todos" Content="Consultar Todos" HorizontalAlignment="Left" Margin="232,476,0,0" VerticalAlignment="Top" Width="214"/>
         </Grid>
 
